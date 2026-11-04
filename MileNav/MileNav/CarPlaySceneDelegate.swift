@@ -19,7 +19,7 @@ import Combine
 final class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
     private var interfaceController: CPInterfaceController?
     private var mapTemplate: CPMapTemplate?
-    private var navigationSession: CPMapTemplateNavigationSession?
+    private var navigationSession: CPNavigationSession?
     private var cancellables = Set<AnyCancellable>()
     private var lastStepIndex = -1
 
@@ -97,7 +97,7 @@ final class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegat
     }
 
     private func stopMirroring() {
-        navigationSession?.cancel()
+        navigationSession?.cancelTrip()
         navigationSession = nil
         lastStepIndex = -1
     }

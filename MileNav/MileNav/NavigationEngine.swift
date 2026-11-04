@@ -309,7 +309,8 @@ final class NavigationEngine: ObservableObject {
         // audio — this is also the channel CarPlay audio uses. No CarPlay
         // entitlement is needed for audio; only the on-screen CarPlay UI is
         // entitlement-gated (see CarPlaySceneDelegate).
-        try? session.setCategory(.playback, mode: .voicePrompt, options: [.duckOthers, .allowBluetooth])
+        try? session.setCategory(.playback, mode: .voicePrompt,
+                                 options: [.duckOthers, .interruptSpokenAudioAndMixWithOthers, .allowBluetooth])
         try? session.setActive(true)
     }
 
