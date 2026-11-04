@@ -24,6 +24,7 @@ struct MileNavApp: App {
             ContentView()
                 .environmentObject(locationManager)
                 .environmentObject(navEngine)
+                .environmentObject(AppServices.shared.preferences)
         }
         .modelContainer(for: Trip.self)
     }

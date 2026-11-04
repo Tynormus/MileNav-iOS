@@ -7,11 +7,14 @@ final class AppServices {
     static let shared = AppServices()
 
     let locationManager: LocationManager
+    let preferences: AppPreferences
     let navEngine: NavigationEngine
 
     private init() {
         let manager = LocationManager()
+        let prefs = AppPreferences()
         locationManager = manager
-        navEngine = NavigationEngine(locationManager: manager)
+        preferences = prefs
+        navEngine = NavigationEngine(locationManager: manager, preferences: prefs)
     }
 }

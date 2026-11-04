@@ -1,34 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0"><dict>
-<key>CFBundleDisplayName</key><string>MileNav</string>
-<key>CFBundleExecutable</key><string>$(EXECUTABLE_NAME)</string>
-<key>CFBundleInfoDictionaryVersion</key><string>6.0</string>
-<key>CFBundleName</key><string>$(PRODUCT_NAME)</string>
-<key>CFBundlePackageType</key><string>APPL</string>
-<key>CFBundleIdentifier</key><string>com.tyclark.milenav</string>
-<key>CFBundleShortVersionString</key><string>1.1.0</string>
-<key>CFBundleVersion</key><string>2</string>
-<!-- Scene manifest: the phone scene is provided by the SwiftUI App lifecycle.
-     The CarPlay scene below is declared so the app is CarPlay-ready; iOS only
-     connects it when the app holds Apple's CarPlay navigation entitlement
-     (granted per-app after review — not present in sideloaded builds, where
-     this entry is simply ignored and the phone app runs normally). -->
-<key>UIApplicationSceneManifest</key><dict>
-<key>UIApplicationSupportsMultipleScenes</key><true/>
-<key>UISceneConfigurations</key><dict>
-<key>CPTemplateApplicationSceneSessionRoleApplication</key><array><dict>
-<key>UISceneConfigurationName</key><string>CarPlay</string>
-<key>UISceneDelegateClassName</key><string>$(PRODUCT_MODULE_NAME).CarPlaySceneDelegate</string>
-</dict></array>
+<plist version="1.0">
+<dict>
+	<key>CFBundleDisplayName</key>
+	<string>MileNav</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.tyclark.milenav</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.2.0</string>
+	<key>CFBundleVersion</key>
+	<string>3</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>MileNav keeps tracking your drive when the screen locks or the app is in the background, so your mileage is complete and accurate when you arrive.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>MileNav keeps tracking your drive when the screen locks, so your mileage is complete when you arrive.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>MileNav uses your location to give turn-by-turn directions and track the miles you drive so they can be logged as Work or Personal.</string>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<true/>
+		<key>UISceneConfigurations</key>
+		<dict>
+			<key>CPTemplateApplicationSceneSessionRoleApplication</key>
+			<array>
+				<dict>
+					<key>UISceneConfigurationName</key>
+					<string>CarPlay</string>
+					<key>UISceneDelegateClassName</key>
+					<string>$(PRODUCT_MODULE_NAME).CarPlaySceneDelegate</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
+	<key>UILaunchScreen</key>
+	<dict/>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
 </dict>
-</dict>
-<key>UISupportedInterfaceOrientations</key><array><string>UIInterfaceOrientationPortrait</string><string>UIInterfaceOrientationLandscapeLeft</string><string>UIInterfaceOrientationLandscapeRight</string></array>
-<!-- Launch screen declaration (REQUIRED for full-screen native resolution on modern iPhones). -->
-<key>UILaunchScreen</key><dict/>
-<!-- Location: navigation + mileage tracking. -->
-<key>NSLocationWhenInUseUsageDescription</key><string>MileNav uses your location to give turn-by-turn directions and track the miles you drive so they can be logged as Work or Personal.</string>
-<key>NSLocationAlwaysAndWhenInUseUsageDescription</key><string>MileNav keeps tracking your drive when the screen locks or the app is in the background, so your mileage is complete and accurate when you arrive.</string>
-<key>NSLocationAlwaysUsageDescription</key><string>MileNav keeps tracking your drive when the screen locks, so your mileage is complete when you arrive.</string>
-<key>UIBackgroundModes</key><array><string>location</string></array>
-</dict></plist>
+</plist>

@@ -59,3 +59,15 @@ xcodebuild -project MileNav/MileNav.xcodeproj -scheme MileNav \
   Always keeps mileage tracking alive with the screen locked mid-drive.
 - No accounts, no API keys, no server: search and routing are Apple
   MapKit, and all trips stay on the phone (SwiftData).
+
+
+## v1.2 — personalization (2026-11-03)
+
+- **Settings tab** with routing preferences: **Avoid Tolls** and **Avoid Highways**
+  (applied to new routes and automatic re-routes; a route that still uses tolls
+  is flagged on the preview).
+- **Map style**: Standard / Satellite / Hybrid, applied to the route preview,
+  active navigation, and trip maps.
+- **Mileage is GPS-only**: logged miles are the miles actually driven (wrong
+  turns and detours included). The pre-calculated route distance is shown for
+  reference and never counted.

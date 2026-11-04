@@ -17,6 +17,10 @@ struct ContentView: View {
             TripListView()
                 .tabItem { Label("Log", systemImage: "list.bullet.rectangle") }
                 .tag(2)
+
+            SettingsView()
+                .tabItem { Label("Settings", systemImage: "gearshape.fill") }
+                .tag(3)
         }
         .fullScreenCover(isPresented: $nav.isPresentingNavigation) {
             ActiveNavigationView()

@@ -16,6 +16,8 @@
 		B0000013 /* TripListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000013 /* TripListView.swift */; };
 		B0000014 /* TripDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000014 /* TripDetailView.swift */; };
 		B0000015 /* ExportManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000015 /* ExportManager.swift */; };
+		B0000017 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000017 /* Preferences.swift */; };
+		B0000018 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000018 /* SettingsView.swift */; };
 		B0000016 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0000016 /* Assets.xcassets */; };
 		A0000000 /* MileNavApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MileNavApp.swift; sourceTree = "<group>"; };
 		A0000001 /* AppServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppServices.swift; sourceTree = "<group>"; };
@@ -33,10 +35,12 @@
 		A0000013 /* TripListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripListView.swift; sourceTree = "<group>"; };
 		A0000014 /* TripDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailView.swift; sourceTree = "<group>"; };
 		A0000015 /* ExportManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportManager.swift; sourceTree = "<group>"; };
+		A0000017 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		A0000018 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A0000016 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 
 		C0000001 /* MileNav */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MileNav.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0000001 /* MileNav */ = {isa = PBXGroup; children = ( A0000000, A0000001, A0000002, A0000003, A0000004, A0000005, A0000006, A0000007, A0000008, A0000009, A0000010, A0000011, A0000012, A0000013, A0000014, A0000015 ); path = MileNav; sourceTree = "<group>"; };
+		D0000001 /* MileNav */ = {isa = PBXGroup; children = ( A0000000, A0000001, A0000002, A0000003, A0000004, A0000005, A0000006, A0000007, A0000008, A0000009, A0000010, A0000011, A0000012, A0000013, A0000014, A0000015, A0000017, A0000018 ); path = MileNav; sourceTree = "<group>"; };
 		D0000002 = {isa = PBXGroup; children = ( D0000001, D0000003, A0000016 ); sourceTree = "<group>"; };
 		D0000003 /* Products */ = {isa = PBXGroup; children = ( C0000001 ); name = Products; sourceTree = "<group>"; };
 		E0000001 /* MileNav */ = {isa = PBXNativeTarget; buildConfigurationList = F0000002; buildPhases = ( F0000001, F0000004 ); buildRules = ( ); dependencies = ( ); name = MileNav; productName = MileNav; productReference = C0000001; productType = "com.apple.product-type.application"; };
@@ -57,6 +61,8 @@
 				B0000013 /* TripListView.swift in Sources */,
 				B0000014 /* TripDetailView.swift in Sources */,
 				B0000015 /* ExportManager.swift in Sources */,
+				B0000017 /* Preferences.swift in Sources */,
+				B0000018 /* SettingsView.swift in Sources */,
 			); runOnlyForDeploymentPostprocessing = 0; };
 		F0000004 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (
 				B0000016 /* Assets.xcassets in Resources */,

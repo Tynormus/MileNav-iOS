@@ -7,6 +7,7 @@ import MapKit
 struct ActiveNavigationView: View {
     @EnvironmentObject private var nav: NavigationEngine
     @EnvironmentObject private var locationManager: LocationManager
+    @EnvironmentObject private var preferences: AppPreferences
     @State private var cameraPosition: MapCameraPosition = .userLocation(followsHeading: true, fallback: .automatic)
     @State private var showEndConfirm = false
 
@@ -22,6 +23,7 @@ struct ActiveNavigationView: View {
                 }
                 UserAnnotation()
             }
+            .mapStyle(preferences.mapStyleOption.mapStyle)
             .ignoresSafeArea()
 
             VStack {

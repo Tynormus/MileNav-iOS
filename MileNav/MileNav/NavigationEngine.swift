@@ -28,6 +28,7 @@ final class NavigationEngine: ObservableObject {
     @Published var pendingClassification: TripDraft?
 
     private let locationManager: LocationManager
+    private let preferences: AppPreferences
     private let speech = AVSpeechSynthesizer()
     private let geocoder = CLGeocoder()
 
@@ -41,8 +42,9 @@ final class NavigationEngine: ObservableObject {
     private var announcedNearForStep = -1
     private var resetGuidanceOnNextRoute = false
 
-    init(locationManager: LocationManager) {
+    init(locationManager: LocationManager, preferences: AppPreferences) {
         self.locationManager = locationManager
+        self.preferences = preferences
         locationManager.onLocationUpdate = { [weak self] location in
             DispatchQueue.main.async {
                 self?.handleLocation(location)
@@ -114,6 +116,10 @@ final class NavigationEngine: ObservableObject {
         request.source = MKMapItem(placemark: MKPlacemark(coordinate: from.coordinate))
         request.destination = destination
         request.transportType = .automobile
+        // Personalization (Settings tab): honored for new routes AND for
+        // automatic re-routes, since every calculation goes through here.
+        request.tollPreference = preferences.avoidTolls ? .avoid : .any
+        request.highwayPreference = preferences.avoidHighways ? .avoid : .any
         directions?.cancel()
         let calc = MKDirections(request: request)
         directions = calc

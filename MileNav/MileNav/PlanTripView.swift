@@ -5,6 +5,7 @@ import MapKit
 struct PlanTripView: View {
     @EnvironmentObject private var locationManager: LocationManager
     @EnvironmentObject private var nav: NavigationEngine
+    @EnvironmentObject private var preferences: AppPreferences
     @StateObject private var search = PlaceSearch()
     @State private var query = ""
     @State private var cameraPosition: MapCameraPosition = .automatic
@@ -55,6 +56,12 @@ struct PlanTripView: View {
                     locationManager.requestWhenInUse()
                 }
                 locationManager.startUpdating()
+                // Routing preferences may have changed in Settings since this
+                // route was calculated — refresh it so Avoid Tolls/Highways
+                // take effect.
+                if nav.destination != nil, !nav.isNavigating {
+                    nav.calculateRoute()
+                }
             }
             .onChange(of: locationManager.currentLocation?.coordinate.latitude) { _, _ in
                 // First location fix arrived after a destination was picked —
@@ -111,6 +118,7 @@ struct PlanTripView: View {
                 }
                 UserAnnotation()
             }
+            .mapStyle(preferences.mapStyleOption.mapStyle)
             .frame(height: 300)
             .clipShape(RoundedRectangle(cornerRadius: 14))
             .padding(.horizontal)
@@ -130,6 +138,19 @@ struct PlanTripView: View {
                     Text("\(Formatters.miles(route.distance)) · \(Formatters.duration(route.expectedTravelTime)) · arrive \(nav.arrivalTime, format: .dateTime.hour().minute())")
                         .font(.subheadline.weight(.semibold))
                         .padding(.top, 2)
+                    if route.hasTolls {
+                        Label(preferences.avoidTolls
+                              ? "This route still uses toll roads — no toll-free route was found"
+                              : "This route uses toll roads",
+                              systemImage: "dollarsign.circle.fill")
+                            .font(.footnote.weight(.semibold))
+                            .foregroundStyle(.orange)
+                    }
+                    if preferences.avoidTolls || preferences.avoidHighways {
+                        Text("Routing: \(preferences.avoidTolls ? "avoiding tolls" : "")\(preferences.avoidTolls && preferences.avoidHighways ? " · " : "")\(preferences.avoidHighways ? "avoiding highways" : "")")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                    }
                 } else if let error = nav.routeError {
                     Text(error)
                         .font(.subheadline)

@@ -32,8 +32,8 @@ final class Trip {
     var startLongitude: Double = 0
     var endLatitude: Double = 0
     var endLongitude: Double = 0
-    /// The mileage that counts for this trip, in meters: the GPS-tracked
-    /// distance when tracking worked, otherwise the planned route distance.
+    /// The mileage that counts for this trip, in meters: strictly the
+    /// GPS-measured miles as driven (never the planned route distance).
     var distanceMeters: Double = 0
     var trackedDistanceMeters: Double = 0
     var routeDistanceMeters: Double = 0
@@ -99,10 +99,12 @@ struct TripDraft: Identifiable {
     var trackedDistanceMeters: Double
     var routeDistanceMeters: Double
 
-    /// Miles that count: GPS-tracked if we tracked a meaningful distance,
-    /// otherwise the planned route distance.
+    /// Miles that count: ONLY the miles actually driven, measured by GPS —
+    /// wrong turns and detours included. The pre-calculated route distance
+    /// is kept on the trip for reference but is never counted (Ty's rule,
+    /// 2026-11-03).
     var loggedDistanceMeters: Double {
-        trackedDistanceMeters > 100 ? trackedDistanceMeters : routeDistanceMeters
+        trackedDistanceMeters
     }
     var loggedMiles: Double { loggedDistanceMeters / 1609.344 }
     var duration: TimeInterval { endDate.timeIntervalSince(startDate) }

@@ -27,9 +27,13 @@ struct ClassifyTripView: View {
                     .padding(.top, 8)
 
                     HStack(spacing: 12) {
-                        summaryCard(title: "Miles", value: String(format: "%.2f", draft.loggedMiles))
+                        summaryCard(title: "Miles driven", value: String(format: "%.2f", draft.loggedMiles))
                         summaryCard(title: "Drive time", value: Formatters.duration(draft.duration))
                     }
+
+                    Text("Counted from GPS as you drove it — wrong turns included. The planned route was \(Formatters.miles(draft.routeDistanceMeters)); it isn't counted.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
 
                     VStack(alignment: .leading, spacing: 6) {
                         Label(draft.startAddress, systemImage: "circle.fill")

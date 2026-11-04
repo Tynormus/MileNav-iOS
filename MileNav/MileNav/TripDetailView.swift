@@ -4,6 +4,7 @@ import MapKit
 
 struct TripDetailView: View {
     @Bindable var trip: Trip
+    @EnvironmentObject private var preferences: AppPreferences
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
     @State private var cameraPosition: MapCameraPosition = .automatic
@@ -21,6 +22,7 @@ struct TripDetailView: View {
                         MapPolyline(coordinates: [trip.startCoordinate, trip.endCoordinate])
                             .stroke(.blue.opacity(0.6), lineWidth: 3)
                     }
+                    .mapStyle(preferences.mapStyleOption.mapStyle)
                     .frame(height: 200)
                     .listRowInsets(EdgeInsets())
                 }
@@ -38,13 +40,10 @@ struct TripDetailView: View {
 
             Section("Trip") {
                 LabeledContent("Date", value: trip.startDate.formatted(date: .abbreviated, time: .shortened))
-                LabeledContent("Miles", value: String(format: "%.2f mi", trip.distanceMiles))
+                LabeledContent("Miles counted (GPS, as driven)", value: String(format: "%.2f mi", trip.distanceMiles))
                 LabeledContent("Drive time", value: Formatters.duration(trip.duration))
-                if trip.trackedDistanceMeters > 0 {
-                    LabeledContent("GPS-tracked", value: Formatters.miles(trip.trackedDistanceMeters))
-                }
                 if trip.routeDistanceMeters > 0 {
-                    LabeledContent("Planned route", value: Formatters.miles(trip.routeDistanceMeters))
+                    LabeledContent("Planned route (not counted)", value: Formatters.miles(trip.routeDistanceMeters))
                 }
             }
 
