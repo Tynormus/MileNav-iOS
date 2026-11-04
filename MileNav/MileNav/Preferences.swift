@@ -1,5 +1,6 @@
 import Foundation
 import MapKit
+import SwiftUI // for MapStyle (declared in MapKit's SwiftUI overlay)
 
 /// How the map looks. Applied to every map in the app (route preview,
 /// active navigation, trip detail).
