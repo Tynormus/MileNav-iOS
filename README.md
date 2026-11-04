@@ -37,6 +37,22 @@ xcodebuild -project MileNav/MileNav.xcodeproj -scheme MileNav \
   -derivedDataPath build/DerivedData build
 ```
 
+## CarPlay status (read this)
+
+- **In-car audio works today, no entitlement needed:** spoken directions
+  play through the car speakers over CarPlay audio / Bluetooth, ducking
+  your music, and can ride the hands-free (HFP) channel like a call
+  prompt. Put the phone on a mount for the map.
+- **The on-screen CarPlay UI is implemented but dormant:**
+  `CarPlaySceneDelegate.swift` mirrors the phone's active route onto a
+  CarPlay map template, and the scene is declared in Info.plist. iOS only
+  connects it when the app holds Apple's CarPlay navigation entitlement
+  (`com.apple.developer.carplay-navigation`), which Apple grants per app
+  after review to App Store–distributed apps. A sideloaded build signed
+  with a personal Apple ID does not carry that entitlement, so the
+  CarPlay scene never activates — the code is there, ready, if a paid
+  developer account + Apple CarPlay approval ever happen.
+
 ## First run
 
 - Allow **location (Always)** when asked — "While Using" works too, but

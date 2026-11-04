@@ -13,9 +13,10 @@ struct MileNavApp: App {
     @StateObject private var navEngine: NavigationEngine
 
     init() {
-        let manager = LocationManager()
-        _locationManager = StateObject(wrappedValue: manager)
-        _navEngine = StateObject(wrappedValue: NavigationEngine(locationManager: manager))
+        // Shared instances: the CarPlay scene delegate (when active) drives
+        // the very same engine the phone UI is using.
+        _locationManager = StateObject(wrappedValue: AppServices.shared.locationManager)
+        _navEngine = StateObject(wrappedValue: AppServices.shared.navEngine)
     }
 
     var body: some Scene {

@@ -302,7 +302,14 @@ final class NavigationEngine: ObservableObject {
 
     private func activateAudioSession() {
         let session = AVAudioSession.sharedInstance()
-        try? session.setCategory(.playback, mode: .voicePrompt, options: [.duckOthers])
+        // .voicePrompt + .duckOthers: directions briefly lower the music
+        // instead of talking over it. .allowBluetooth lets the prompts ride
+        // the car's hands-free (HFP) channel like a call prompt, so they are
+        // heard through the car speakers even in cars that don't stream app
+        // audio — this is also the channel CarPlay audio uses. No CarPlay
+        // entitlement is needed for audio; only the on-screen CarPlay UI is
+        // entitlement-gated (see CarPlaySceneDelegate).
+        try? session.setCategory(.playback, mode: .voicePrompt, options: [.duckOthers, .allowBluetooth])
         try? session.setActive(true)
     }
 
