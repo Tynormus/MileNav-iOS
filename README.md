@@ -71,3 +71,10 @@ xcodebuild -project MileNav/MileNav.xcodeproj -scheme MileNav \
 - **Mileage is GPS-only**: logged miles are the miles actually driven (wrong
   turns and detours included). The pre-calculated route distance is shown for
   reference and never counted.
+
+
+## v1.3 — voice options (2026-11-03)
+
+- **Voice Guidance on/off** in Settings — silent navigation when off.
+- **Voice picker**: System Default or any English voice installed on the
+  device, with a **Test Voice** preview. Applies immediately, even mid-drive.

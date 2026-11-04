@@ -15,9 +15,9 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.2.0</string>
+	<string>1.3.0</string>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>4</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>MileNav keeps tracking your drive when the screen locks or the app is in the background, so your mileage is complete and accurate when you arrive.</string>
 	<key>NSLocationAlwaysUsageDescription</key>

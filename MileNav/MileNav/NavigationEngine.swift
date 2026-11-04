@@ -300,8 +300,16 @@ final class NavigationEngine: ObservableObject {
 
     private func speak(_ text: String) {
         guard !text.isEmpty else { return }
+        // Settings > Voice Guidance: off means silent navigation.
+        guard preferences.voiceEnabled else { return }
         let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        // Settings > Voice: a chosen voice, or the system default when unset.
+        if !preferences.voiceIdentifier.isEmpty,
+           let chosen = AVSpeechSynthesisVoice(identifier: preferences.voiceIdentifier) {
+            utterance.voice = chosen
+        } else {
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        }
         utterance.rate = AVSpeechUtteranceDefaultSpeechRate
         speech.speak(utterance)
     }

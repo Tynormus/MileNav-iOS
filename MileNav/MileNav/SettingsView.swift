@@ -1,8 +1,17 @@
 import SwiftUI
+import AVFoundation
 
 struct SettingsView: View {
     @EnvironmentObject private var preferences: AppPreferences
     @EnvironmentObject private var nav: NavigationEngine
+    @State private var previewSynth = AVSpeechSynthesizer()
+
+    /// English voices installed on this device, alphabetical by name.
+    private var availableVoices: [AVSpeechSynthesisVoice] {
+        AVSpeechSynthesisVoice.speechVoices()
+            .filter { $0.language.hasPrefix("en") }
+            .sorted { $0.name < $1.name }
+    }
 
     var body: some View {
         NavigationStack {
@@ -37,6 +46,29 @@ struct SettingsView: View {
                 }
 
                 Section {
+                    Toggle(isOn: $preferences.voiceEnabled) {
+                        Label("Voice Guidance", systemImage: "speaker.wave.2.fill")
+                    }
+                    if preferences.voiceEnabled {
+                        Picker("Voice", selection: $preferences.voiceIdentifier) {
+                            Text("System Default").tag("")
+                            ForEach(availableVoices, id: \.identifier) { voice in
+                                Text("\(voice.name) (\(voice.language))").tag(voice.identifier)
+                            }
+                        }
+                        Button {
+                            previewVoice()
+                        } label: {
+                            Label("Test Voice", systemImage: "play.circle")
+                        }
+                    }
+                } header: {
+                    Text("Voice")
+                } footer: {
+                    Text("Turn voice guidance off for silent navigation, or pick a different voice. Changes apply right away — including mid-drive. Extra voices can be downloaded in iOS Settings > Accessibility > Spoken Content > Voices.")
+                }
+
+                Section {
                     LabeledContent("Miles counted", value: "GPS, as driven")
                 } header: {
                     Text("Mileage")
@@ -46,10 +78,23 @@ struct SettingsView: View {
 
                 Section("About") {
                     LabeledContent("App", value: "MileNav")
-                    LabeledContent("Version", value: "1.2.0")
+                    LabeledContent("Version", value: "1.3.0")
                 }
             }
             .navigationTitle("Settings")
         }
+    }
+
+    /// Speaks a sample line with the currently selected voice — works even
+    /// while you're just browsing voices, so you can hear before you commit.
+    private func previewVoice() {
+        previewSynth.stopSpeaking(at: .immediate)
+        let utterance = AVSpeechUtterance(string: "In half a mile, turn right. Your trip miles are being counted as you drive.")
+        if !preferences.voiceIdentifier.isEmpty,
+           let chosen = AVSpeechSynthesisVoice(identifier: preferences.voiceIdentifier) {
+            utterance.voice = chosen
+        }
+        utterance.rate = AVSpeechUtteranceDefaultSpeechRate
+        previewSynth.speak(utterance)
     }
 }

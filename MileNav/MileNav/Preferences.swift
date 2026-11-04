@@ -39,11 +39,21 @@ final class AppPreferences: ObservableObject {
     @Published var mapStyleOption: MapStyleOption {
         didSet { UserDefaults.standard.set(mapStyleOption.rawValue, forKey: Keys.mapStyle) }
     }
+    /// Spoken guidance on/off. Defaults to ON.
+    @Published var voiceEnabled: Bool {
+        didSet { UserDefaults.standard.set(voiceEnabled, forKey: Keys.voiceEnabled) }
+    }
+    /// AVSpeechSynthesisVoice identifier; empty = system default voice.
+    @Published var voiceIdentifier: String {
+        didSet { UserDefaults.standard.set(voiceIdentifier, forKey: Keys.voiceIdentifier) }
+    }
 
     private enum Keys {
         static let avoidTolls = "pref.avoidTolls"
         static let avoidHighways = "pref.avoidHighways"
         static let mapStyle = "pref.mapStyle"
+        static let voiceEnabled = "pref.voiceEnabled"
+        static let voiceIdentifier = "pref.voiceIdentifier"
     }
 
     init() {
@@ -51,5 +61,8 @@ final class AppPreferences: ObservableObject {
         avoidHighways = UserDefaults.standard.bool(forKey: Keys.avoidHighways)
         mapStyleOption = MapStyleOption(
             rawValue: UserDefaults.standard.string(forKey: Keys.mapStyle) ?? "") ?? .standard
+        // Voice guidance defaults to ON — only an explicit stored value turns it off.
+        voiceEnabled = UserDefaults.standard.object(forKey: Keys.voiceEnabled) as? Bool ?? true
+        voiceIdentifier = UserDefaults.standard.string(forKey: Keys.voiceIdentifier) ?? ""
     }
 }
