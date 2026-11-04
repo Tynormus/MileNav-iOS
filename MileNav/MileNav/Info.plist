@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+<key>CFBundleDisplayName</key><string>MileNav</string>
+<key>CFBundleExecutable</key><string>$(EXECUTABLE_NAME)</string>
+<key>CFBundleInfoDictionaryVersion</key><string>6.0</string>
+<key>CFBundleName</key><string>$(PRODUCT_NAME)</string>
+<key>CFBundlePackageType</key><string>APPL</string>
+<key>CFBundleIdentifier</key><string>com.tyclark.milenav</string>
+<key>CFBundleShortVersionString</key><string>1.0.0</string>
+<key>CFBundleVersion</key><string>1</string>
+<key>UIApplicationSceneManifest</key><dict><key>UIApplicationSupportsMultipleScenes</key><false/></dict>
+<key>UISupportedInterfaceOrientations</key><array><string>UIInterfaceOrientationPortrait</string><string>UIInterfaceOrientationLandscapeLeft</string><string>UIInterfaceOrientationLandscapeRight</string></array>
+<!-- Launch screen declaration (REQUIRED for full-screen native resolution on modern iPhones). -->
+<key>UILaunchScreen</key><dict/>
+<!-- Location: navigation + mileage tracking. -->
+<key>NSLocationWhenInUseUsageDescription</key><string>MileNav uses your location to give turn-by-turn directions and track the miles you drive so they can be logged as Work or Personal.</string>
+<key>NSLocationAlwaysAndWhenInUseUsageDescription</key><string>MileNav keeps tracking your drive when the screen locks or the app is in the background, so your mileage is complete and accurate when you arrive.</string>
+<key>NSLocationAlwaysUsageDescription</key><string>MileNav keeps tracking your drive when the screen locks, so your mileage is complete when you arrive.</string>
+<key>UIBackgroundModes</key><array><string>location</string></array>
+</dict></plist>
