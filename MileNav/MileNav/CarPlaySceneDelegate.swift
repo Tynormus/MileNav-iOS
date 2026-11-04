@@ -87,9 +87,9 @@ final class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegat
               let from = locationManager.currentLocation else { return }
         let origin = MKMapItem(placemark: MKPlacemark(coordinate: from.coordinate))
         let routeChoice = CPRouteChoice(
-            summaryText: "Route from MileNav",
-            variants: ["Route from MileNav"],
-            selectionSummary: "Navigation started on iPhone")
+            summaryVariants: ["Route from MileNav"],
+            additionalInformationVariants: ["Turn-by-turn from your iPhone"],
+            selectionSummaryVariants: ["Navigation started on iPhone"])
         let trip = CPTrip(origin: origin, destination: destination, routeChoices: [routeChoice])
         navigationSession = mapTemplate.startNavigationSession(for: trip)
         lastStepIndex = -1
